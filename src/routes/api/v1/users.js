@@ -7,10 +7,23 @@ let inMemoryUser = [
 	{id: 3, username: 'user3', password: 'pass3', role: 'user'}
 ];
 
-//Gettin all users on the server
+//Getting all users on the server
 router.get('/', (req, res)=> {
 	res.status(200).json(inMemoryUser);
 });
 
+//Getting a specific user with the id property
+router.get('/:id', (req, res)=> {
+	const { id } = req.params;
+	const user = inMemoryUser.filter((theUser)=> theUser.id === parseInt(id));
+
+	if(!user){
+		res.status(404).send('The specified user does not exit on this platform');
+	}
+
+	else{
+		res.status(200).json(user);
+	}
+});
 
 module.exports = router;

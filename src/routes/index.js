@@ -5,6 +5,7 @@ const homeRoute = require('./home');
 const usersRoute = require('./api/v1/users');
 
 router.use('/', homeRoute);
-router.use('./api/v1/users', usersRoute);
+router.use('/api/v1/users', usersRoute);
+
 
 module.exports = router;
