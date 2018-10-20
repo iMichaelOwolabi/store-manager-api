@@ -26,4 +26,33 @@ router.get('/:id', (req, res)=> {
 	}
 });
 
+//Creating a new user
+router.post('/', (req, res)=> {
+	const {username, password,} = req.body;
+
+	const lastId = inMemoryUser.length;
+	const id = lastId + 1;
+
+	let newUser = 
+	{'id': id, 'username': username, 'password': password, role: 'user'};
+
+	inMemoryUser.push(newUser);
+
+	res.status(201).location(`/api/users/${id}`).json(newUser);
+});
+
+//Updating a user information
+router.put('/:id', (req, res)=> {
+    const {id} = req.params;
+    const user = inMemoryUser.filter((theUser)=> theUser.id === parseInt(id));
+    const {username, password, role} = req.body;
+    
+    if(!user){
+        res.status(404).send(`There is no user with the given information on this platform`);
+    }
+    
+    let userUpdate = {'id': id, 'username': username, 'password': password, 'role': role};
+    res.status(200).location(`./api/users/${id}`).json(userUpdate);
+    
+    });
 module.exports = router;
