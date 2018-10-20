@@ -1,0 +1,28 @@
+{
+  "name": "store-manager-api",
+  "version": "1.0.0",
+  "description": "Store Manager Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iMichaelOwolabi/store-manager-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iMichaelOwolabi/store-manager-api/issues"
+  },
+  "homepage": "https://github.com/iMichaelOwolabi/store-manager-api#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0"
+  }
+}
