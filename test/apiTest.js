@@ -31,8 +31,30 @@ describe('GET /user/:id', () => {
             .get('/api/v1/users/0')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect(404) //expecting HTTP status code
-            .expect('"The specified user does not exist on this platform"') // expecting content value
+            .expect(404)
+            .expect('"The specified user does not exist on this platform"')
+            .end((err) => {
+                if (err) return done(err);
+                done();
+            });
+    });
+});
+
+// Test Post on users endpoint
+describe('POST /users', () => {
+    let dummyData = {
+        id: 1,
+        username: 'dummyUser',
+        password: 'dummyPass',
+        role: 'dummyRole'
+    }
+    it('respond with 201 created', (done) => {
+        request(app)
+            .post('/api/v1/users')
+            .send(dummyData)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(201)
             .end((err) => {
                 if (err) return done(err);
                 done();
