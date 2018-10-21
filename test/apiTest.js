@@ -61,3 +61,25 @@ describe('POST /users', () => {
             });
     });
 });
+
+// Test PUT on users endpoint
+describe('PUT /users/:id', () => {
+    let dummyData = {
+        id: 1,
+        username: 'dummyUser',
+        password: 'dummyPass',
+        role: 'dummyRole'
+    }
+    it('respond with 201 created', (done) => {
+        request(app)
+            .put('/api/v1/users/1')
+            .send(dummyData)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(201)
+            .end((err) => {
+                if (err) return done(err);
+                done();
+            });
+    });
+});

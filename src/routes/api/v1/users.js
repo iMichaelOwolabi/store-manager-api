@@ -45,15 +45,15 @@ router.post('/', (req, res)=> {
 // Updating a user information
 router.put('/:id', (req, res) => {
     const {id} = req.params;
-    const user = inMemoryUser.filter(theUser => theUser.id === parseInt(id));
+    const user = inMemoryUser.filter(theUser => theUser.id === parseInt(id))[0];
     const {username, password, role} = req.body;
     
     if(!user){
-        res.status(404).send(`There is no user with the given information on this platform`);
+        res.status(404).json(`There is no user with the given information on this platform`);
     }
     
     let userUpdate = {'id': id, 'username': username, 'password': password, 'role': role};
-    res.status(200).location(`./api/users/${id}`).json(userUpdate);
+    res.status(201).location(`./api/users/${id}`).json(userUpdate);
     
 });
 module.exports = router;
