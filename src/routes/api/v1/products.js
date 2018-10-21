@@ -15,10 +15,10 @@ router.get('/', (req, res) => {
 // Getting a apecific product
 router.get('/:id', (req, res) => {
     const {id} = req.params;
-    const product = inMemoryProducts.filter(theProduct => theProduct.id === parseInt(id));
+    const product = inMemoryProducts.filter(theProduct => theProduct.id === parseInt(id))[0];
 
     if(!product) {
-        res.status(404).send(`Product with id ${id} does not exist on this platform`);
+        res.status(404).json(`The specified product does not exist on this platform`);
         return;
     }
     
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const {productName, price, category, quantity} = req.body;
-    const product = inMemoryProducts.filter(theProduct => theProduct.id === parseInt(id));
+    const product = inMemoryProducts.filter(theProduct => theProduct.id === parseInt(id))[0];
     if(!product){
         res.status(404).send(`The product with the given id cannot be found`);
     }
@@ -68,7 +68,7 @@ router.put('/:id', (req, res) => {
 // Delete a specific product
 router.delete('/:id', (req, res) => {
     const {id} = req.params;
-    const product = inMemoryProducts.filter(theProduct => theProduct.id === parseInt(id));
+    const product = inMemoryProducts.filter(theProduct => theProduct.id === parseInt(id))[0];
 
     if(!product){
         res.status(404).send(`The product with the given id cannot be found`);

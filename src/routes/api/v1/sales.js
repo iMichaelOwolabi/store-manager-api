@@ -15,10 +15,10 @@ router.get('/', (req, res)=> {
 //Getting a apecific sales record
 router.get('/:id', (req, res)=> {
     const {id} = req.params;
-    const sales = inMemorySalesRecord.filter((theSales)=> theSales.id === parseInt(id));
+    const sales = inMemorySalesRecord.filter((theSales)=> theSales.id === parseInt(id))[0];
 
     if(!sales){
-        res.status(404).send(`Product with id ${id} does not exist on this platform`);
+        res.status(404).json(`The specified sales record does not exist on this platform`);
         return;
     }
     
