@@ -13,12 +13,13 @@ router.get('/', (req, res)=> {
 });
 
 // Getting a specific user with the id property
-router.get('/:id', (req, res)=> {
+router.get('/:id', (req, res) => {
 	const { id } = req.params;
-	const user = inMemoryUser.filter(theUser => theUser.id === parseInt(id));
 
-	if (!user){
-		res.status(404).send('The specified user does not exit on this platform');
+	const user = inMemoryUser.filter(theUser => theUser.id === parseInt(id))[0];
+
+	if(!user){
+		res.status(404).json('The specified user does not exist on this platform');
 	}
 
 	else{
