@@ -11,3 +11,46 @@ let inMemorySalesRecord = [
 router.get('/', (req, res)=> {
 	res.status(200).json(inMemorySalesRecord);
 });
+
+//Getting a apecific sales record
+router.get('/:id', (req, res)=> {
+    const {id} = req.params;
+    const sales = inMemorySalesRecord.filter((theSales)=> theSales.id === parseInt(id));
+
+    if(!sales){
+        res.status(404).send(`Product with id ${id} does not exist on this platform`);
+        return;
+    }
+    
+    res.status(200).json(sales);
+});
+
+ //Creating a new sales record
+ router.post('/', (req, res)=> {
+    const {productName, price, quantity} = req.body;
+    const lastId = inMemorySalesRecord.length;
+    const id = lastId + 1;
+
+    let username = 'user2';
+
+    let newSales = {
+        'id': id,
+        'productName': productName,
+        'quantity': quantity,
+        'price': price,
+    };
+    const amount = newSales.price * newSales.quantity;
+
+    let newSalesRecord = {
+        'id': newSales.id,
+        'productName': newSales.productName,
+        'quantity': newSales.quantity,
+        'amount': amount,
+        'attendant': username
+    };
+
+    inMemorySalesRecord.push(newSalesRecord);
+    res.status(201).location(`./api/sales/${id}`).json(newSalesRecord);
+});
+
+module.exports = router;
