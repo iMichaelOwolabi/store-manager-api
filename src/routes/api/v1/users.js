@@ -7,17 +7,17 @@ let inMemoryUser = [
 	{id: 3, username: 'user3', password: 'pass3', role: 'user'}
 ];
 
-//Getting all users on the server
+// Getting all users on the server
 router.get('/', (req, res)=> {
 	res.status(200).json(inMemoryUser);
 });
 
-//Getting a specific user with the id property
+// Getting a specific user with the id property
 router.get('/:id', (req, res)=> {
 	const { id } = req.params;
-	const user = inMemoryUser.filter((theUser)=> theUser.id === parseInt(id));
+	const user = inMemoryUser.filter(theUser => theUser.id === parseInt(id));
 
-	if(!user){
+	if (!user){
 		res.status(404).send('The specified user does not exit on this platform');
 	}
 
@@ -41,10 +41,10 @@ router.post('/', (req, res)=> {
 	res.status(201).location(`/api/users/${id}`).json(newUser);
 });
 
-//Updating a user information
-router.put('/:id', (req, res)=> {
+// Updating a user information
+router.put('/:id', (req, res) => {
     const {id} = req.params;
-    const user = inMemoryUser.filter((theUser)=> theUser.id === parseInt(id));
+    const user = inMemoryUser.filter(theUser => theUser.id === parseInt(id));
     const {username, password, role} = req.body;
     
     if(!user){
@@ -54,5 +54,5 @@ router.put('/:id', (req, res)=> {
     let userUpdate = {'id': id, 'username': username, 'password': password, 'role': role};
     res.status(200).location(`./api/users/${id}`).json(userUpdate);
     
-    });
+});
 module.exports = router;
